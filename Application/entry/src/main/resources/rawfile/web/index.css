@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    padding: 20px;
+    background-color: rgb(246, 251, 255);
+    overflow-y: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.income,.outcome {
+    width: 200px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    margin-right: 12px;
+    font-size: 12px;
+}
+
+.pay-record {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+}
+
+.tag {
+    padding: 6px 8px;
+    border-radius: 10px;
+}
+
+.transaction-icon {
+    padding: 10px;
+    color: rgb(191, 224, 144);
+    border-radius: 10px;
+    background: rgba(191, 224, 144, 0.1);
+}

@@ -1,0 +1,18 @@
+{
+  "appSelected": {
+    "appId": "5765880207854194147",
+    "appName": "managemoney",
+    "deviceTypes": [
+      {
+        "deviceType": 4
+      }
+    ],
+    "enableSites": "CN",
+    "installationFree": 0,
+    "packageType": 7,
+    "projectId": "388421841222100786",
+    "projectName": "多多理财",
+    "siteId": "CN"
+  },
+  "teamId": "30086000767810517"
+}

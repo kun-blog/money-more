@@ -1,0 +1,109 @@
+<Head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="index.css">
+</Head>
+
+<body>
+<div class="box" id="app">
+    <div class="flex space-between flex-align-center row">
+        <div class="flex flex-align-center income">
+            <img src="assets/income.png" width="40" height="40"/>
+            <div style="margin-left: 10px">
+                <p>¥{{payRecordsTotal.income}}</p>
+                <p>收入</p>
+            </div>
+        </div>
+        <div class="flex flex-align-center outcome">
+            <img src="assets/outcome.png" width="40" height="40"/>
+            <div style="margin-left: 10px">
+                <p>￥{{payRecordsTotal.outcome}}</p>
+                <p>支出</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex space-between flex-align-center row">
+        <h3>概述</h3>
+        <span>一周内</span>
+    </div>
+    <div class="row">
+        <div id="main" style="width: 100%; height: 400px;"></div>
+    </div>
+    <div class="row">
+        <h3>类别</h3>
+    </div>
+
+    <div class="row flex space-between flex-align-center pay-record">
+        <div class="flex flex-align-center">
+            <span class="transaction-icon">转</span>
+            <span style="margin-left: 20px">转账</span>
+        </div>
+
+        <span class="tag">2000</span>
+    </div>
+</div>
+</body>
+
+
+<script src="vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"
+        integrity="sha512-EmNxF3E6bM0Xg1zvmkeYD3HDBeGxtsG92IxFt1myNZhXdCav9MzvuH/zNMBU1DmIPN6njrhX1VTbqdJxQ2wHDg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+ const {createApp, ref} = Vue;
+
+  // 获取从上层传入的参数，记得要进行反序列化处理
+  const payRecordsTotalVal = JSON.parse(context.getPayRecordsTotal());
+console.log(JSON.stringify(payRecordsTotalVal))
+  createApp({
+    setup() {
+      return {
+        
+        payRecordsTotal: ref(payRecordsTotalVal)
+      };
+    }
+  }).mount('#app');
+
+  // 初始化 ECharts 实例
+  var myChart = echarts.init(document.getElementById('main'));
+
+  // 获取日期，作为x轴数据
+  const getDates = () => {
+    const dates = [];
+    const today = new Date();
+    for (let i = -1; i <= 5; i++) {
+      const date = new Date();
+      date.setDate(today.getDate() + i);
+      const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+      const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+      dates.push(month + '/' + day);
+    }
+    return dates;
+  };
+
+
+  // 指定图表的配置项和数据
+  var option = {
+    xAxis: {
+      data: getDates(),
+      axisLabel: {
+        fontSize: 10 // 设置 x 轴字体大小为 10
+      }
+    },
+    yAxis: {},
+    series: [
+      {
+        name: '进账',
+        type: 'bar',
+        itemStyle: {
+          color: 'rgb(255, 195, 94)', // 设置柱状图颜色
+          borderRadius: [5, 5, 0, 0] // 设置柱状图圆角
+        },
+        data: payRecordsTotalVal.incomeRecords.map(a => [a.createAt, a.amount])
+      }
+    ]
+  };
+  // 使用刚指定的配置项和数据显示图表
+  myChart.setOption(option);
+
+
+</script>

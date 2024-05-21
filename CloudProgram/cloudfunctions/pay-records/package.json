@@ -1,0 +1,16 @@
+{
+	"name":"pay-records",
+	"version":"1.0.0",
+	"description":"",
+	"main":"pay-records.js",
+	"scripts":{
+		"test":"echo \"Error: no test specified\" && exit 1"
+	},
+	"author":"",
+	"license":"ISC",
+	"dependencies":{
+		"@hw-agconnect/common-server": "^1.0.21",
+		"@hw-agconnect/database-server": "^1.0.7",
+		"crypto-js": "^4.2.0"
+	}
+}
